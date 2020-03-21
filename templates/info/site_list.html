@@ -1,0 +1,18 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Site List
+{% endblock %}
+
+{% block content %}
+    <h2> Site List</h2>
+    <ul>
+        {% for site in site_list %}
+            <li>
+                <a href="">{{ site }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no sites here.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

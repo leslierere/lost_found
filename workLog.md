@@ -1,3 +1,5 @@
+## Config
+
 ### S1: Create the environment
 
 condo env: lost_found
@@ -44,7 +46,7 @@ conda install --name lost_found mysqlclient
 
 
 
-
+## Model
 
 ### S5: 在models.py里面建表
 
@@ -63,6 +65,8 @@ migrate
 
 
 
+
+
 ### S6: 创建superuser
 
 Username: tester
@@ -76,6 +80,14 @@ Password:(secret)
 ### S7: register models in admin.py
 
 
+
+
+
+## Template
+
+https://courseinfo.ligent.net/2020sp/_illinois/is590wfo/week5.html
+
+add template->create view->add the path in urls.py
 
 
 

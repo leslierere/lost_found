@@ -1,0 +1,26 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Site - {{ site }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ site }}</h2>
+    <section>
+        <table>
+            <tr>
+                <th>Site:</th>
+                <td>{{ site.site_name }}</td>
+            </tr>
+            <tr>
+                <th>Location:</th>
+                <td>{{ site.location}}</td>
+            </tr>
+            <tr>
+                <th>Contact:</th>
+                <td>{{ site.contact}} </td>
+            </tr>
+        </table>
+    </section>
+
+{% endblock %}

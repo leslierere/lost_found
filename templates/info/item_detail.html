@@ -1,0 +1,34 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Item - {{ item }} - {{ item.type }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ item }}</h2>
+    <section>
+        <table>
+            <tr>
+                <th>Item:</th>
+                <td>{{ item.item_name }}</td>
+            </tr>
+            <tr>
+                <th>Time:</th>
+                <td>{{ item.eventDate}}, </td> <td> {{ item.eventTime}} </td>
+            </tr>
+            <tr>
+                <th>Place:</th>
+                <td>{{ item.place}} </td>
+            </tr>
+            <tr>
+                <th>P.S.</th>
+                <td>{{ item.ps}} </td>
+            </tr>
+            <tr>
+                <th>Site located:</th>
+                <td>{{ item.site}} </td>
+            </tr>
+        </table>
+    </section>
+
+{% endblock %}

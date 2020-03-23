@@ -101,3 +101,18 @@ you may consider Django views to be the “controllers” and Django templates t
 
 
 
+## Controller
+
+https://courseinfo.ligent.net/2020sp/_illinois/is590wfo/week6.html
+
+#### S1:
+
+Move url.py to the application
+
+#### S2:
+
+And in the past url.py, change the ones except the admin, use `include()`
+
+#### S3: refactor the code in views.py from function-based to object-based
+
+also, you need make changes in urls.py

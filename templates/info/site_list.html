@@ -9,7 +9,7 @@
     <ul>
         {% for site in site_list %}
             <li>
-                <a href="">{{ site }}</a>
+                <a href="{{ site.get_absolute_url }}">{{ site }}</a>
             </li>
         {% empty %}
             <li><em>There are currently no sites here.</em></li>

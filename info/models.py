@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -11,6 +12,10 @@ class Site(models.Model):
 
     def __str__(self):
         return '%s' % self.site_name
+
+    def get_absolute_url(self):
+        return reverse('info_site_detail_url_pattern',
+                       kwargs={'pk': self.pk})
 
 
 class User(models.Model):
@@ -43,3 +48,7 @@ class Item(models.Model):
 
     class Meta:
         ordering = ['registeredTime']
+
+    def get_absolute_url(self):
+        return reverse('info_item_detail_url_pattern',
+                       kwargs={'pk': self.pk})

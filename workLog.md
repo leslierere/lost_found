@@ -116,3 +116,15 @@ And in the past url.py, change the ones except the admin, use `include()`
 #### S3: refactor the code in views.py from function-based to object-based
 
 also, you need make changes in urls.py
+
+
+
+
+
+## Link
+
+#### S1: Set redirect for the main page in urls.py, and write according views.py
+
+
+
+Find refactor or the same variable in the whole scope

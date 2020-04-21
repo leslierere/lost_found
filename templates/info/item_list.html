@@ -9,7 +9,7 @@
     <ul>
         {% for item in item_list %}
             <li>
-                <a href="">{{ item }}</a>
+                <a href="{{ item.get_absolute_url }}">{{ item }}</a>
             </li>
         {% empty %}
             <li><em>There are currently no items here.</em></li>

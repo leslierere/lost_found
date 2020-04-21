@@ -26,9 +26,10 @@
             </tr>
             <tr>
                 <th>Site located:</th>
-                <td>{{ item.site}} </td>
+                <td><a href="{{ item.site.get_absolute_url }}">{{ item.site}}</a> </td>
             </tr>
         </table>
     </section>
 
 {% endblock %}
+

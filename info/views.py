@@ -3,6 +3,8 @@ from django.http.response import HttpResponse
 from django.template import loader
 from django.views import View
 
+from info.forms import SiteForm, ItemForm
+from info.utils import ObjectCreateMixin
 from .models import (
     Item,
     Site)
@@ -58,3 +60,13 @@ class SiteDetail(View):
             'info/site_detail.html',
             {'site': site}
         )
+
+
+class SiteCreate(ObjectCreateMixin, View):
+    form_class = SiteForm
+    template_name = 'info/site_form.html'
+
+
+class ItemCreate(ObjectCreateMixin, View):
+    form_class = ItemForm
+    template_name = 'info/item_form.html'

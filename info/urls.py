@@ -19,7 +19,10 @@ from info.views import (
     SiteList,
     ItemList,
     ItemDetail,
-    SiteDetail)
+    SiteDetail,
+    SiteCreate,
+    ItemCreate,
+)
 
 
 urlpatterns = [
@@ -29,10 +32,18 @@ urlpatterns = [
     path('item/<int:pk>/',
          ItemDetail.as_view(),
          name = 'info_item_detail_url_pattern'),
+    path('item/create/',
+         ItemCreate.as_view(),
+         name='info_item_create_url_pattern'
+         ),
     path('site/',
          SiteList.as_view(),
          name = 'info_site_list_url_pattern'),
     path('site/<int:pk>/',
          SiteDetail.as_view(),
          name = 'info_site_detail_url_pattern'),
+    path('site/create/',
+         SiteCreate.as_view(),
+         name = 'info_site_create_url_pattern'
+         ),
 ]

@@ -1,0 +1,16 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Create Site
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'info_site_create_url_pattern' %}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Site</button>
+    </form>
+
+{% endblock %}

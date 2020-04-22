@@ -128,3 +128,14 @@ also, you need make changes in urls.py
 
 
 Find refactor or the same variable in the whole scope
+
+
+
+
+
+
+
+## Form
+
+Create form: <u>date validation undone</u>
+

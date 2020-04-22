@@ -14,7 +14,7 @@ class Site(models.Model):
         return '%s' % self.site_name
 
     def get_absolute_url(self):
-        return reverse('info_site_detail_url_pattern',
+        return reverse('info_site_detail_urlpattern',
                        kwargs={'pk': self.pk})
 
 
@@ -50,5 +50,5 @@ class Item(models.Model):
         ordering = ['registeredTime']
 
     def get_absolute_url(self):
-        return reverse('info_item_detail_url_pattern',
+        return reverse('info_item_detail_urlpattern',
                        kwargs={'pk': self.pk})

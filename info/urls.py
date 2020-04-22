@@ -28,22 +28,26 @@ from info.views import (
 urlpatterns = [
     path('item/',
          ItemList.as_view(),
-         name = 'info_item_list_url_pattern'),
+         name = 'info_item_list_urlpattern'),
     path('item/<int:pk>/',
          ItemDetail.as_view(),
-         name = 'info_item_detail_url_pattern'),
+         name = 'info_item_detail_urlpattern'),
     path('item/create/',
          ItemCreate.as_view(),
-         name='info_item_create_url_pattern'
+         name='info_item_create_urlpattern'
          ),
+    # path('item/update/',
+    #      ItemUpdate.as_view(),
+    #      name='info_item_update_urlpattern'
+    #      ),
     path('site/',
          SiteList.as_view(),
-         name = 'info_site_list_url_pattern'),
+         name = 'info_site_list_urlpattern'),
     path('site/<int:pk>/',
          SiteDetail.as_view(),
-         name = 'info_site_detail_url_pattern'),
+         name = 'info_site_detail_urlpattern'),
     path('site/create/',
          SiteCreate.as_view(),
-         name = 'info_site_create_url_pattern'
+         name = 'info_site_create_urlpattern'
          ),
 ]

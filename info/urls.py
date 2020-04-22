@@ -22,6 +22,7 @@ from info.views import (
     SiteDetail,
     SiteCreate,
     ItemCreate,
+    ItemUpdate,
 )
 
 
@@ -36,10 +37,10 @@ urlpatterns = [
          ItemCreate.as_view(),
          name='info_item_create_urlpattern'
          ),
-    # path('item/update/',
-    #      ItemUpdate.as_view(),
-    #      name='info_item_update_urlpattern'
-    #      ),
+    path('item/update/',
+         ItemUpdate.as_view(),
+         name='info_item_update_urlpattern'
+         ),
     path('site/',
          SiteList.as_view(),
          name = 'info_site_list_urlpattern'),

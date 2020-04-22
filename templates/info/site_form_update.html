@@ -1,0 +1,16 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Update Site
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ site.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Site</button>
+    </form>
+
+{% endblock %}

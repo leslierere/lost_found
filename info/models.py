@@ -17,6 +17,10 @@ class Site(models.Model):
         return reverse('info_site_detail_urlpattern',
                        kwargs={'pk': self.pk})
 
+    def get_update_url(self):
+        return reverse('info_site_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
 
 class User(models.Model):
     id = models.AutoField(primary_key = True)

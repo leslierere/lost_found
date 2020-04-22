@@ -111,3 +111,41 @@ class SiteCreate(ObjectCreateMixin, View):
     template_name = 'info/site_form.html'
 
 
+
+class SiteUpdate(View):
+    form_class = SiteForm
+    model = Site
+    template_name = 'info/site_form_update.html'
+
+    def get_object(self, pk):
+        return get_object_or_404(
+            self.model,
+            pk=pk
+        )
+
+    def get(self, request, pk):
+        site = self.get_object(pk)
+        context = {
+            'form': self.form_class(
+                instance=site),
+            'site': site,
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request, pk):
+        site = self.get_object(pk)
+        bound_form = self.form_class(
+            request.POST, instance=site)
+        if bound_form.is_valid():
+            new_site = bound_form.save()
+            return redirect(new_site)
+        else:
+            context = {
+                'form': bound_form,
+                'site': site,
+            }
+            return render(
+                request,
+                self.template_name,
+                context
+            )

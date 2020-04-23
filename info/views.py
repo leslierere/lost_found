@@ -9,6 +9,7 @@ from .models import (
     Item,
     Site)
 
+
 # Create your views here.
 # def item_list_view(request):
 #     item_list = Item.objects.all()
@@ -26,11 +27,12 @@ class ItemList(View):
             {'item_list': Item.objects.all()}
         )
 
+
 class ItemDetail(View):
     def get(self, request, pk):
         item = get_object_or_404(
             Item,
-            pk = pk
+            pk=pk
         )
         return render(
             request,
@@ -82,6 +84,30 @@ class ItemUpdate(View):
                 context
             )
 
+
+class ItemDelete(View):
+
+    def get(self, request, pk):
+        item = self.get_object(pk)
+
+        return render(
+            request,
+            'info/item_confirm_delete.html',
+            {'item': item}
+        )
+
+    def get_object(self, pk):
+        return get_object_or_404(
+            Item,
+            pk=pk
+        )
+
+    def post(self, request, pk):
+        item = self.get_object(pk)
+        item.delete()
+        return redirect('info_item_list_urlpattern')
+
+
 class SiteList(View):
 
     def get(self, request):
@@ -97,7 +123,7 @@ class SiteDetail(View):
     def get(self, request, pk):
         site = get_object_or_404(
             Site,
-            pk = pk
+            pk=pk
         )
         return render(
             request,
@@ -109,7 +135,6 @@ class SiteDetail(View):
 class SiteCreate(ObjectCreateMixin, View):
     form_class = SiteForm
     template_name = 'info/site_form.html'
-
 
 
 class SiteUpdate(View):
@@ -149,3 +174,34 @@ class SiteUpdate(View):
                 self.template_name,
                 context
             )
+
+
+class SiteDelete(View):
+
+    def get(self, request, pk):
+        site = self.get_object(pk)
+        items = site.items.all()
+        if items.count() > 0:
+            return render(
+                request,
+                'info/site_refuse_delete.html',
+                {'site': site,
+                 'items': items}
+            )
+        else:
+            return render(
+                request,
+                'info/site_confirm_delete.html',
+                {'site': site}
+            )
+
+    def get_object(self, pk):
+        return get_object_or_404(
+            Site,
+            pk=pk
+        )
+
+    def post(self, request, pk):
+        site = self.get_object(pk)
+        site.delete()
+        return redirect('info_site_list_urlpattern')

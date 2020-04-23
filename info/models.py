@@ -21,6 +21,10 @@ class Site(models.Model):
         return reverse('info_site_update_urlpattern',
                        kwargs={'pk': self.pk})
 
+    def get_delete_url(self):
+        return reverse('info_site_delete_urlpattern',
+                       kwargs={'pk': self.pk})
+
 
 class User(models.Model):
     id = models.AutoField(primary_key = True)
@@ -59,4 +63,8 @@ class Item(models.Model):
 
     def get_update_url(self):
         return reverse('info_item_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('info_item_delete_urlpattern',
                        kwargs={'pk': self.pk})

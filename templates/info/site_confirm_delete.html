@@ -1,0 +1,19 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Delete Site
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ site.get_delete_url }}"
+        method="post">
+    {% csrf_token %}
+    <p>
+        Are you sure that you want to delete
+        site {{ site }}?
+    </p>
+    <a href="{{ site.get_absolute_url }}">Cancel</a>
+    <button type="submit">Delete Site</button>
+    </form>
+{% endblock %}

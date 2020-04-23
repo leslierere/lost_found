@@ -19,11 +19,13 @@ from info.views import (
     SiteList,
     ItemList,
     ItemDetail,
-    SiteDetail,
-    SiteCreate,
     ItemCreate,
     ItemUpdate,
+    ItemDelete,
+    SiteDetail,
+    SiteCreate,
     SiteUpdate,
+    SiteDelete,
 )
 
 
@@ -42,6 +44,10 @@ urlpatterns = [
          ItemUpdate.as_view(),
          name='info_item_update_urlpattern'
          ),
+    path('item/<int:pk>/delete/',
+         ItemDelete.as_view(),
+         name='info_item_delete_urlpattern'
+         ),
     path('site/',
          SiteList.as_view(),
          name = 'info_site_list_urlpattern'),
@@ -55,4 +61,8 @@ urlpatterns = [
     path('site/<int:pk>/update/',
          SiteUpdate.as_view(),
          name='info_site_update_urlpattern'),
+    path('site/<int:pk>/delete/',
+         SiteDelete.as_view(),
+         name='info_site_delete_urlpattern'
+         ),
 ]

@@ -44,7 +44,7 @@ class Item(models.Model):
     place = models.CharField(max_length=80) # where the item is found or lost
     eventDate = models.DateField()
     eventTime = models.CharField(max_length=20) # like 'around 2pm'
-    registeredTime = models.DateTimeField(default=timezone.now)
+    registeredTime = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField()
     ps = models.CharField(max_length=80, null=True, blank=True)
 

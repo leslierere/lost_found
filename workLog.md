@@ -150,3 +150,6 @@ I only did it for test data, leace pagination to later tutorials.
 ## Relocate Template
 
 move templates under each app
+
+If you need the 'about' page, refer to week12-part2-11:00
+

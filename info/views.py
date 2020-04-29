@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http.response import HttpResponse
 from django.template import loader
 from django.views import View
+from django.views.generic import ListView
 
 from info.forms import SiteForm, ItemForm
-from info.utils import ObjectCreateMixin
+from info.utils import ObjectCreateMixin, PageLinksMixin
 from .models import (
     Item,
     Site)
@@ -108,14 +109,9 @@ class ItemDelete(View):
         return redirect('info_item_list_urlpattern')
 
 
-class SiteList(View):
-
-    def get(self, request):
-        return render(
-            request,
-            'info/site_list.html',
-            {'site_list': Site.objects.all()}
-        )
+class SiteList(PageLinksMixin, ListView):
+    paginate_by = 15
+    model = Site
 
 
 class SiteDetail(View):

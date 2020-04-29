@@ -141,3 +141,12 @@ Create form: <u>date validation undone</u>
 
 
 
+## Pagination
+
+I only did it for test data, leace pagination to later tutorials.
+
+
+
+## Relocate Template
+
+move templates under each app

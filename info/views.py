@@ -2,10 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http.response import HttpResponse
 from django.template import loader
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
 from info.forms import SiteForm, ItemForm
-from info.utils import ObjectCreateMixin, PageLinksMixin
+from info.utils import PageLinksMixin
 from .models import (
     Item,
     Site)
@@ -19,14 +19,18 @@ from .models import (
 #     output = template.render(context)
 #     return HttpResponse(output)
 
-class ItemList(View):
+class ItemList(PageLinksMixin, ListView):
+    paginate_by = 10
+    model = Item
 
-    def get(self, request):
-        return render(
-            request,
-            'info/item_list.html',
-            {'item_list': Item.objects.all()}
-        )
+# class ItemList(View):
+#
+#     def get(self, request):
+#         return render(
+#             request,
+#             'info/item_list.html',
+#             {'item_list': Item.objects.all()}
+#         )
 
 
 class ItemDetail(View):
@@ -42,9 +46,9 @@ class ItemDetail(View):
         )
 
 
-class ItemCreate(ObjectCreateMixin, View):
+class ItemCreate(CreateView):
     form_class = ItemForm
-    template_name = 'info/item_form.html'
+    model = Item
 
 
 class ItemUpdate(View):
@@ -128,9 +132,9 @@ class SiteDetail(View):
         )
 
 
-class SiteCreate(ObjectCreateMixin, View):
+class SiteCreate(CreateView):
     form_class = SiteForm
-    template_name = 'info/site_form.html'
+    model = Site
 
 
 class SiteUpdate(View):

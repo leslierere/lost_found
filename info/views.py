@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http.response import HttpResponse
-from django.template import loader
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
 from info.forms import SiteForm, ItemForm
 from info.utils import PageLinksMixin
@@ -51,66 +50,17 @@ class ItemCreate(CreateView):
     model = Item
 
 
-class ItemUpdate(View):
+class ItemUpdate(UpdateView):
     form_class = ItemForm
     model = Item
     template_name = 'info/item_form_update.html'
 
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk
-        )
-
-    def get(self, request, pk):
-        item = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=item),
-            'item': item,
-        }
-        return render(request, self.template_name, context)
-
-    def post(self, request, pk):
-        item = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=item)
-        if bound_form.is_valid():
-            new_item = bound_form.save()
-            return redirect(new_item)
-        else:
-            context = {
-                'form': bound_form,
-                'item': item,
-            }
-            return render(
-                request,
-                self.template_name,
-                context
-            )
 
 
-class ItemDelete(View):
+class ItemDelete(DeleteView):
+    model = Item
+    success_url = reverse_lazy('info_item_list_urlpattern')
 
-    def get(self, request, pk):
-        item = self.get_object(pk)
-
-        return render(
-            request,
-            'info/item_confirm_delete.html',
-            {'item': item}
-        )
-
-    def get_object(self, pk):
-        return get_object_or_404(
-            Item,
-            pk=pk
-        )
-
-    def post(self, request, pk):
-        item = self.get_object(pk)
-        item.delete()
-        return redirect('info_item_list_urlpattern')
 
 
 class SiteList(PageLinksMixin, ListView):
@@ -137,43 +87,10 @@ class SiteCreate(CreateView):
     model = Site
 
 
-class SiteUpdate(View):
+class SiteUpdate(UpdateView):
     form_class = SiteForm
     model = Site
     template_name = 'info/site_form_update.html'
-
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk
-        )
-
-    def get(self, request, pk):
-        site = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=site),
-            'site': site,
-        }
-        return render(request, self.template_name, context)
-
-    def post(self, request, pk):
-        site = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=site)
-        if bound_form.is_valid():
-            new_site = bound_form.save()
-            return redirect(new_site)
-        else:
-            context = {
-                'form': bound_form,
-                'site': site,
-            }
-            return render(
-                request,
-                self.template_name,
-                context
-            )
 
 
 class SiteDelete(View):

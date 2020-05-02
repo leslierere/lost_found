@@ -31,6 +31,16 @@ class ItemList(PageLinksMixin, ListView):
 #             {'item_list': Item.objects.all()}
 #         )
 
+class LostItems(PageLinksMixin, ListView):
+    paginate_by = 10
+    model = Item
+    queryset = model.objects.filter(type='L')
+
+
+class FoundItems(PageLinksMixin, ListView):
+    paginate_by = 10
+    model = Item
+    queryset = model.objects.filter(type='F')
 
 class ItemDetail(View):
     def get(self, request, pk):

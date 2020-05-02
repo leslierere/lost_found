@@ -87,10 +87,11 @@ class SiteDetail(View):
             Site,
             pk=pk
         )
+        item_list = site.items.all()
         return render(
             request,
             'info/site_detail.html',
-            {'site': site}
+            {'site': site, 'item_list':item_list}
         )
 
 

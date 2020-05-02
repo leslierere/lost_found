@@ -18,7 +18,7 @@ class SiteForm(forms.ModelForm):
         return self.cleaned_data['contact']
 
 
-class DateInput(forms.DateInput):
+class DateInput(forms.DateInput): # for date selection box
     input_type = 'date'
 
 

@@ -41,6 +41,8 @@ class FoundItems(PageLinksMixin, ListView):
     paginate_by = 10
     model = Item
     queryset = model.objects.filter(type='F')
+    context_object_name = 'found_item_list'
+
 
 class ItemDetail(View):
     def get(self, request, pk):

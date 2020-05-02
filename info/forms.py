@@ -18,10 +18,14 @@ class SiteForm(forms.ModelForm):
         return self.cleaned_data['contact']
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
+        widgets = {'eventDate': DateInput()}
         fields = '__all__'
 
     def clean_item_name(self):

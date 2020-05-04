@@ -1,0 +1,16 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Create Item
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'info_item_create_lost_urlpattern' %}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Item</button>
+    </form>
+
+{% endblock %}

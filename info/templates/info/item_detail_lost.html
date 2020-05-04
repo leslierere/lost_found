@@ -1,0 +1,53 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Item - {{ item }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ item }}</h2>
+    <ul>
+        <li>
+            <a href="{{ item.get_update_url }}"
+                class="button">
+                Edit Item
+            </a>
+        </li>
+        <li>
+            <a href="{{ item.get_delete_url }}"
+                class="button">
+                Delete Item
+            </a>
+        </li>
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Item:</th>
+                <td>{{ item.item_name }}</td>
+            </tr>
+            <tr>
+                <th>Time:</th>
+                <td>{{ item.eventDate}}, </td> <td> {{ item.eventTime}} </td>
+            </tr>
+            <tr>
+                <th>Lost Place:</th>
+                <td>{{ item.place}} </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ item.description}} </td>
+            </tr>
+            <tr>
+                <th>Contact Number:</th>
+                <td>{{ item.phone}}</td>
+            </tr>
+            <tr>
+                <th>Contact Email:</th>
+                <td>{{ item.email}}</td>
+            </tr>
+        </table>
+    </section>
+
+{% endblock %}
+

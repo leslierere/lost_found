@@ -17,13 +17,11 @@ from django.urls import path
 
 from info.views import (
     SiteList,
-    ItemList,
-    FoundItems,
-    LostItems,
-    ItemDetail,
-    ItemCreate,
-    ItemUpdate,
-    ItemDelete,
+    LostItemList,
+    LostItemDetail,
+    LostItemCreate,
+    LostItemUpdate,
+    LostItemDelete,
     SiteDetail,
     SiteCreate,
     SiteUpdate,
@@ -32,29 +30,29 @@ from info.views import (
 
 
 urlpatterns = [
-    path('item/',
-         ItemList.as_view(),
-         name = 'info_item_list_urlpattern'),
-    path('item/found/',
-         FoundItems.as_view(),
-         name='info_item_found_urlpattern'),
+    # path('item/',
+    #      ItemList.as_view(),
+    #      name = 'info_item_list_urlpattern'),
+    # path('item/found/',
+    #      FoundItems.as_view(),
+    #      name='info_item_found_urlpattern'),
     path('item/lost/',
-         LostItems.as_view(),
-         name='info_item_lost_urlpattern'),
-    path('item/<int:pk>/',
-         ItemDetail.as_view(),
-         name = 'info_item_detail_urlpattern'),
-    path('item/create/',
-         ItemCreate.as_view(),
-         name='info_item_create_urlpattern'
+         LostItemList.as_view(),
+         name='info_item_list_lost_urlpattern'),
+    path('item/lost/<int:pk>/',
+         LostItemDetail.as_view(),
+         name = 'info_item_detail_lost_urlpattern'),
+    path('item/lost/create/',
+         LostItemCreate.as_view(),
+         name='info_item_create_lost_urlpattern'
          ),
-    path('item/<int:pk>/update/',
-         ItemUpdate.as_view(),
-         name='info_item_update_urlpattern'
+    path('item/lost/<int:pk>/update/',
+         LostItemUpdate.as_view(),
+         name='info_item_update_lost_urlpattern'
          ),
-    path('item/<int:pk>/delete/',
-         ItemDelete.as_view(),
-         name='info_item_delete_urlpattern'
+    path('item/lost/<int:pk>/delete/',
+         LostItemDelete.as_view(),
+         name='info_item_delete_lost_urlpattern'
          ),
     path('site/',
          SiteList.as_view(),

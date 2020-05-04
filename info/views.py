@@ -3,10 +3,11 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
-from info.forms import SiteForm, ItemForm
+from info.forms import SiteForm, LostItemForm, FoundItemForm
 from info.utils import PageLinksMixin
 from .models import (
-    Item,
+    LostItem,
+    FoundItem,
     Site)
 
 
@@ -18,9 +19,9 @@ from .models import (
 #     output = template.render(context)
 #     return HttpResponse(output)
 
-class ItemList(PageLinksMixin, ListView):
-    paginate_by = 10
-    model = Item
+# class ItemList(PageLinksMixin, ListView):
+#     paginate_by = 10
+#     model = Item
 
 # class ItemList(View):
 #
@@ -31,47 +32,45 @@ class ItemList(PageLinksMixin, ListView):
 #             {'item_list': Item.objects.all()}
 #         )
 
-class LostItems(PageLinksMixin, ListView):
+class LostItemList(PageLinksMixin, ListView):
     paginate_by = 10
-    model = Item
-    queryset = model.objects.filter(type='L')
-
+    model = LostItem
+    context_object_name = 'lost_items_list'
 
 class FoundItems(PageLinksMixin, ListView):
     paginate_by = 10
-    model = Item
-    queryset = model.objects.filter(type='F')
-    context_object_name = 'found_item_list'
+    model = FoundItem
+    # context_object_name = 'found_item_list'
 
 
-class ItemDetail(View):
+class LostItemDetail(View):
     def get(self, request, pk):
         item = get_object_or_404(
-            Item,
+            LostItem,
             pk=pk
         )
         return render(
             request,
-            'info/item_detail.html',
+            'info/item_detail_lost.html',
             {'item': item}
         )
 
 
-class ItemCreate(CreateView):
-    form_class = ItemForm
-    model = Item
+class LostItemCreate(CreateView):
+    form_class = LostItemForm
+    model = LostItem
 
 
-class ItemUpdate(UpdateView):
-    form_class = ItemForm
-    model = Item
+class LostItemUpdate(UpdateView):
+    form_class = LostItemForm
+    model = LostItem
     template_name = 'info/item_form_update.html'
 
 
 
-class ItemDelete(DeleteView):
-    model = Item
-    success_url = reverse_lazy('info_item_list_urlpattern')
+class LostItemDelete(DeleteView):
+    model = LostItem
+    success_url = reverse_lazy('info_item_list_lost_urlpattern')
 
 
 

@@ -1,4 +1,5 @@
 from django.db import models
+# from django.db.models import EmailField
 from django.urls import reverse
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
@@ -37,22 +38,58 @@ class User(models.Model):
         return '%s %s'%(self.first_name, self.last_name)
 
 
-class Item(models.Model):
-    item_id = models.AutoField(primary_key = True)
+class LostItem(models.Model):
+    item_id = models.AutoField(primary_key=True)
     item_name = models.CharField(max_length=30)
-    type = models.CharField(max_length=10, choices=(('L', 'Lost'), ('F', "Found"),)) # lost or found
-    place = models.CharField(max_length=80) # where the item is found or lost
+    place = models.CharField(max_length=80)  # where the item is lost
     eventDate = models.DateField()
-    eventTime = models.CharField(max_length=20) # like 'around 2pm'
+    eventTime = models.CharField(max_length=20)  # like 'around 2pm'
     registeredTime = models.DateTimeField(auto_now_add=True)
-    quantity = models.IntegerField()
-    ps = models.CharField(max_length=80, null=True, blank=True)
-
-    site = models.ForeignKey(Site, related_name='items', on_delete=models.PROTECT)
+    # quantity = models.IntegerField()
+    description = models.CharField(max_length=80, null=True, blank=True)
+    phone = PhoneNumberField(null=True, blank=True) # may changed to be autofilled later
+    email = models.EmailField()
+    found = models.BooleanField(default=False)
     user = models.ForeignKey(User, related_name='items', on_delete=models.PROTECT)
 
     def __str__(self):
-        return '%s %s at %s' % (self.item_name, self.type, self.place)
+        return '%s lost at %s' % (self.item_name, self.place)
+
+    class Meta:
+        ordering = ['registeredTime']
+
+    def get_absolute_url(self):
+        return reverse('info_item_detail_lost_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('info_item_update_lost_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('info_item_delete_lost_urlpattern',
+                       kwargs={'pk': self.pk})
+
+
+class FoundItem(models.Model):
+    item_id = models.AutoField(primary_key=True)
+    item_name = models.CharField(max_length=30)
+    place = models.CharField(max_length=80)  # where the item is found or lost
+    eventDate = models.DateField()
+    eventTime = models.CharField(max_length=20)  # like 'around 2pm'
+    registeredTime = models.DateTimeField(auto_now_add=True)
+    # quantity = models.IntegerField()
+    description = models.CharField(max_length=80, null=True, blank=True)
+    userContact = PhoneNumberField(null=True, blank=True)
+    picked = models.BooleanField(default=False)
+    pickedTime = models.DateTimeField(blank=True)
+    pickedInfo = models.CharField(max_length=80, blank=True, default='')
+    admin = models.CharField(max_length=30, blank=True, default='') # the administrator who process the pickedUp
+
+    site = models.ForeignKey(Site, related_name='items', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return '%s found at %s' % (self.item_name, self.place)
 
     class Meta:
         ordering = ['registeredTime']

@@ -59,7 +59,7 @@ class LostItem(models.Model):
         ordering = ['registeredTime']
 
     def get_absolute_url(self):
-        return reverse('info_item_detail_lost_urlpattern',
+        return reverse('info_lostitem_detail_urlpattern',
                        kwargs={'pk': self.pk})
 
     def get_update_url(self):
@@ -99,7 +99,7 @@ class FoundItem(models.Model):
         ordering = ['registeredTime']
 
     def get_absolute_url(self):
-        return reverse('info_item_detail_found_urlpattern',
+        return reverse('info_founditem_detail_urlpattern',
                        kwargs={'pk': self.pk})
 
     def get_update_url(self):

@@ -46,7 +46,7 @@ urlpatterns = [
          name='info_item_list_lost_urlpattern'),
     path('item/lost/<int:pk>/',
          LostItemDetail.as_view(),
-         name = 'info_item_detail_lost_urlpattern'),
+         name = 'info_lostitem_detail_urlpattern'),
     path('item/lost/create/',
          LostItemCreate.as_view(),
          name='info_item_create_lost_urlpattern'
@@ -64,7 +64,7 @@ urlpatterns = [
          name='info_item_list_found_urlpattern'),
     path('item/found/<int:pk>/',
          FoundItemDetail.as_view(),
-         name='info_item_detail_found_urlpattern'),
+         name='info_founditem_detail_urlpattern'),
     path('item/found/create/',
          FoundItemCreate.as_view(),
          name='info_item_create_found_urlpattern'

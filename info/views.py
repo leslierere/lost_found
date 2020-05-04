@@ -11,26 +11,6 @@ from .models import (
     Site)
 
 
-# Create your views here.
-# def item_list_view(request):
-#     item_list = Item.objects.all()
-#     template = loader.get_template('info/item_list.html')
-#     context = {'item_list': item_list}
-#     output = template.render(context)
-#     return HttpResponse(output)
-
-# class ItemList(PageLinksMixin, ListView):
-#     paginate_by = 10
-#     model = Item
-
-# class ItemList(View):
-#
-#     def get(self, request):
-#         return render(
-#             request,
-#             'info/item_list.html',
-#             {'item_list': Item.objects.all()}
-#         )
 
 class LostItemList(PageLinksMixin, ListView):
     paginate_by = 10
@@ -48,7 +28,7 @@ class LostItemDetail(View):
         )
         return render(
             request,
-            'info/item_detail_lost.html',
+            'info/lostitem_detail.html',
             {'item': item}
         )
 
@@ -89,7 +69,7 @@ class FoundItemDetail(View):
         )
         return render(
             request,
-            'info/item_detail_found.html',
+            'info/founditem_detail.html',
             {'item': item}
         )
 

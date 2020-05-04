@@ -80,9 +80,13 @@ class FoundItem(models.Model):
     registeredTime = models.DateTimeField(auto_now_add=True)
     # quantity = models.IntegerField()
     description = models.CharField(max_length=80, null=True, blank=True)
-    userContact = PhoneNumberField(null=True, blank=True)
+    # userContact = PhoneNumberField(null=True, blank=True)
+
     picked = models.BooleanField(default=False)
-    pickedTime = models.DateTimeField(blank=True)
+    pickedBy = models.CharField(max_length=50, blank=True, default='')
+    phone = PhoneNumberField(null=True, blank=True)  # may changed to be autofilled later
+    email = models.EmailField(blank=True)
+    pickedTime = models.DateTimeField(blank=True, null=True)
     pickedInfo = models.CharField(max_length=80, blank=True, default='')
     admin = models.CharField(max_length=30, blank=True, default='') # the administrator who process the pickedUp
 
@@ -95,13 +99,13 @@ class FoundItem(models.Model):
         ordering = ['registeredTime']
 
     def get_absolute_url(self):
-        return reverse('info_item_detail_urlpattern',
+        return reverse('info_item_detail_found_urlpattern',
                        kwargs={'pk': self.pk})
 
     def get_update_url(self):
-        return reverse('info_item_update_urlpattern',
+        return reverse('info_item_update_found_urlpattern',
                        kwargs={'pk': self.pk})
 
     def get_delete_url(self):
-        return reverse('info_item_delete_urlpattern',
+        return reverse('info_item_delete_found_urlpattern',
                        kwargs={'pk': self.pk})

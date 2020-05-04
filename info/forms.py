@@ -46,7 +46,7 @@ class LostItemForm(forms.ModelForm):
 class FoundItemForm(forms.ModelForm):
     class Meta:
         model = FoundItem
-        widgets = {'eventDate': DateInput()}
+        widgets = {'eventDate': DateInput(), 'pickedTime': DateInput()}
         fields = '__all__'
 
     def clean_item_name(self):

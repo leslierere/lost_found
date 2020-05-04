@@ -1,7 +1,7 @@
 {% extends 'info/base.html' %}
 
 {% block title %}
-    Item - {{ item }} - {{ item.type }}
+    Item - {{ item }}
 {% endblock %}
 
 {% block content %}
@@ -27,11 +27,11 @@
                 <td>{{ item.item_name }}</td>
             </tr>
             <tr>
-                <th>Time:</th>
+                <th>Found Time:</th>
                 <td>{{ item.eventDate}}, </td> <td> {{ item.eventTime}} </td>
             </tr>
             <tr>
-                <th>Place:</th>
+                <th>Found Place:</th>
                 <td>{{ item.place}} </td>
             </tr>
             <tr>

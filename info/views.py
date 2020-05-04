@@ -37,10 +37,7 @@ class LostItemList(PageLinksMixin, ListView):
     model = LostItem
     context_object_name = 'lost_items_list'
 
-class FoundItems(PageLinksMixin, ListView):
-    paginate_by = 10
-    model = FoundItem
-    # context_object_name = 'found_item_list'
+
 
 
 class LostItemDetail(View):
@@ -71,6 +68,48 @@ class LostItemUpdate(UpdateView):
 class LostItemDelete(DeleteView):
     model = LostItem
     success_url = reverse_lazy('info_item_list_lost_urlpattern')
+
+
+class FoundItemList(PageLinksMixin, ListView):
+    paginate_by = 10
+    model = FoundItem
+    context_object_name = 'found_items_list'
+
+# class FoundItems(PageLinksMixin, ListView):
+#     paginate_by = 10
+#     model = FoundItem
+#     # context_object_name = 'found_item_list'
+
+
+class FoundItemDetail(View):
+    def get(self, request, pk):
+        item = get_object_or_404(
+            FoundItem,
+            pk=pk
+        )
+        return render(
+            request,
+            'info/item_detail_found.html',
+            {'item': item}
+        )
+
+
+class FoundItemCreate(CreateView):
+    form_class = FoundItemForm
+    model = FoundItem
+
+
+class FoundItemUpdate(UpdateView): # duplicates
+    form_class = FoundItemForm
+    model = FoundItem
+    template_name = 'info/item_form_update.html'
+
+
+
+class FoundItemDelete(DeleteView): # duplicates
+    model = FoundItem
+    success_url = reverse_lazy('info_item_list_found_urlpattern')
+    # context_object_name = 'item'
 
 
 

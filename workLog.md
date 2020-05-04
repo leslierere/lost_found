@@ -153,3 +153,14 @@ move templates under each app
 
 If you need the 'about' page, refer to week12-part2-11:00
 
+
+
+
+
+email field:
+
+https://docs.djangoproject.com/en/3.0/ref/models/fields/#emailfield
+
+null V.S. blank
+
+https://docs.djangoproject.com/en/3.0/ref/models/fields/#null

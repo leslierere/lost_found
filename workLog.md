@@ -167,8 +167,38 @@ https://docs.djangoproject.com/en/3.0/ref/models/fields/#null
 
 
 
+Hide filed and set default:
 
+https://stackoverflow.com/questions/23718484/django-assign-default-value-to-field-in-modelform
+
+I managed to solve the issue in a way that makes me satisfied, although I'm still not 100% happy with the code.
+
+`a_field` is a required (by the model) field, thus it is necessary to render an `` inside the template. The trick was to make `a_field` non-required:
+
+```py
+class AForm(ModelForm):
+    a_field = Field(required=False, 
+                    widget=forms.HiddenInput)
+    class Meta:
+        model = AModel
+
+    def clean_a_field(self):
+        return 10
+```
 
 ## User
 
 感觉urlpattern会在全局找
+
+
+
+Relate user to customized model: https://docs.djangoproject.com/en/3.0/topics/auth/customizing/
+
+
+
+https://docs.djangoproject.com/en/3.0/topics/auth/default/
+
+
+
+
+

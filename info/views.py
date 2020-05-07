@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -35,7 +36,17 @@ class LostItemDetail(View):
 
 class LostItemCreate(CreateView):
     form_class = LostItemForm
+    # form_class.fields['email'].initial = request.user.email
     model = LostItem
+    # fields = ('item_name', 'place', 'eventDate', 'eventTime', 'description', 'phone', 'email')
+
+    def get_initial(self):
+        email = self.request.user.email
+        return {'email':email}
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(LostItemCreate, self).form_valid(form)
 
 
 class LostItemUpdate(UpdateView):

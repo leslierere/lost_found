@@ -3,6 +3,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Site(models.Model):
@@ -27,15 +29,15 @@ class Site(models.Model):
                        kwargs={'pk': self.pk})
 
 
-class User(models.Model):
-    id = models.AutoField(primary_key = True)
-    first_name = models.CharField(max_length=45)
-    last_name = models.CharField(max_length=45)
-    email = models.EmailField(max_length=254, null=False)
-    phone = PhoneNumberField(null=True, blank=True)
-
-    def __str__(self):
-        return '%s %s'%(self.first_name, self.last_name)
+# class User(models.Model):
+#     id = models.AutoField(primary_key = True)
+#     first_name = models.CharField(max_length=45)
+#     last_name = models.CharField(max_length=45)
+#     email = models.EmailField(max_length=254, null=False)
+#     phone = PhoneNumberField(null=True, blank=True)
+#
+#     def __str__(self):
+#         return '%s %s'%(self.first_name, self.last_name)
 
 
 class LostItem(models.Model):
@@ -50,7 +52,8 @@ class LostItem(models.Model):
     phone = PhoneNumberField(null=True, blank=True) # may changed to be autofilled later
     email = models.EmailField()
     found = models.BooleanField(default=False)
-    user = models.ForeignKey(User, related_name='items', on_delete=models.PROTECT)
+    # user = models.ForeignKey(User, related_name='items', on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return '%s lost at %s' % (self.item_name, self.place)

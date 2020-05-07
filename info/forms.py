@@ -26,7 +26,8 @@ class LostItemForm(forms.ModelForm):
     class Meta:
         model = LostItem
         widgets = {'eventDate': DateInput()}
-        fields = '__all__'
+        exclude = ('user',)
+        # fields = '__all__'
 
     def clean_item_name(self):
         return self.cleaned_data['item_name'].strip()

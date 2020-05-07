@@ -164,3 +164,11 @@ https://docs.djangoproject.com/en/3.0/ref/models/fields/#emailfield
 null V.S. blank
 
 https://docs.djangoproject.com/en/3.0/ref/models/fields/#null
+
+
+
+
+
+## User
+
+感觉urlpattern会在全局找

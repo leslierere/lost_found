@@ -112,3 +112,6 @@ class FoundItem(models.Model):
     def get_delete_url(self):
         return reverse('info_item_delete_found_urlpattern',
                        kwargs={'pk': self.pk})
+
+
+

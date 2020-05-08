@@ -74,11 +74,13 @@
                     Lost Items
                 </a>
             </li>
-            <li>
-                <a href="{% url 'info_myitem_list_urlpattern' %}">
-                    My Lost Items
-                </a>
-            </li>
+            {% if perms.info.add_lostitem %}
+                <li>
+                    <a href="{% url 'info_myitem_list_urlpattern' %}">
+                        My Lost Items
+                    </a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
     <main>

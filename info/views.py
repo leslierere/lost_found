@@ -20,6 +20,16 @@ class LostItemList(PageLinksMixin, ListView):
     context_object_name = 'lost_items_list'
 
 
+class MyItems(PageLinksMixin, ListView):
+    paginate_by = 10
+    # Specifying model = LostItem is shorthand for saying queryset = LostItem.objects.all()
+    # queryset = LostItem.objects.filter(user= request)
+    context_object_name = 'my_items'
+    template_name = 'info/myitems_list.html' # why, sometimes this need not be specified
+
+    def get_queryset(self):
+        return LostItem.objects.filter(user=self.request.user)
+
 
 
 class LostItemDetail(View):

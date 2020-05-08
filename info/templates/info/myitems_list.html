@@ -1,0 +1,36 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Item List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.info.add_lostitem %}
+        <a href="{% url 'info_item_create_lost_urlpattern' %}"
+            class="button button-primary">
+            Create New Item
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2> Item List</h2>
+    {% if perms.info.add_lostitem %}
+        <div class="mobile">
+            <a href="{% url 'info_item_create_lost_urlpattern' %}"
+            class="button button-primary">
+            Create New Item
+            </a>
+        </div>
+
+    {% endif %}
+    <ul>
+        {% for item in my_items %}
+            <li>
+                <a href="{{ item.get_absolute_url }}">{{ item }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no items here.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

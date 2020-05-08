@@ -31,7 +31,7 @@ from info.views import (
     SiteCreate,
     SiteUpdate,
     SiteDelete,
-)
+    MyItems)
 
 
 urlpatterns = [
@@ -44,6 +44,9 @@ urlpatterns = [
     path('item/lost/',
          LostItemList.as_view(),
          name='info_item_list_lost_urlpattern'),
+    path('item/myitems/',
+         MyItems.as_view(),
+         name='info_myitem_list_urlpattern'),
     path('item/lost/<int:pk>/',
          LostItemDetail.as_view(),
          name = 'info_lostitem_detail_urlpattern'),

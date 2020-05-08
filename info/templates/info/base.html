@@ -63,14 +63,20 @@
 {#                    Found Items#}
 {#                </a>#}
 {#            </li>#}
+
+            <li>
+                <a href="{% url 'info_item_list_found_urlpattern' %}">
+                    Found Items
+                </a>
+            </li>
             <li>
                 <a href="{% url 'info_item_list_lost_urlpattern' %}">
                     Lost Items
                 </a>
             </li>
             <li>
-                <a href="{% url 'info_item_list_found_urlpattern' %}">
-                    Found Items
+                <a href="{% url 'info_myitem_list_urlpattern' %}">
+                    My Lost Items
                 </a>
             </li>
         </ul>

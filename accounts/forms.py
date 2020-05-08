@@ -15,6 +15,7 @@ class RegisterForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
+    password = None
 
     class Meta:
         model = User

@@ -4,14 +4,26 @@
     Item List
 {% endblock %}
 
-{% block content %}
-    <h2> Item List</h2>
-    <div>
+{% block create_button %}
+    {% if perms.info.add_lostitem %}
         <a href="{% url 'info_item_create_lost_urlpattern' %}"
             class="button button-primary">
             Create New Item
         </a>
-    </div>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2> Item List</h2>
+    {% if perms.info.add_lostitem %}
+        <div class="mobile">
+            <a href="{% url 'info_item_create_lost_urlpattern' %}"
+            class="button button-primary">
+            Create New Item
+            </a>
+        </div>
+
+    {% endif %}
     <ul>
         {% for item in lost_items_list %}
             <li>

@@ -4,14 +4,26 @@
     Site List
 {% endblock %}
 
-{% block content %}
-    <h2> Site List</h2>
-    <div>
+{% block create_button %}
+    {% if perms.info.add_site %}
         <a href="{% url 'info_site_create_urlpattern' %}"
             class="button button-primary">
             Create New Site
         </a>
-    </div>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2> Site List</h2>
+    {% if perms.info.add_site %}
+        <div class="mobile">
+            <a href="{% url 'info_site_create_urlpattern' %}"
+            class="button button-primary">
+            Create New Site
+            </a>
+        </div>
+    {% endif %}
+
     <ul>
         {% for site in site_list %}
             <li>

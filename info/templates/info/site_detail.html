@@ -6,19 +6,24 @@
 
 {% block content %}
     <h2>{{ site }}</h2>
-    <ul>
-        <li>
+    <ul class="inline">
+        {% if perms.info.change_site %}
+            <li>
             <a href="{{ site.get_update_url }}"
                 class="button">
                 Edit Site
             </a>
-        </li>
-        <li>
+            </li>
+        {% endif %}
+        {% if perms.info.delete_site %}
+            <li>
             <a href="{{ site.get_delete_url }}"
             class="button">
                 Delete Site
             </a>
-        </li>
+            </li>
+        {% endif %}
+
     </ul>
     <section>
         <table>

@@ -114,16 +114,15 @@ class FoundItem(models.Model):
                        kwargs={'pk': self.pk})
 
 
-
 class Advice(models.Model):
     advice_id = models.AutoField(primary_key=True)
-    contents = models.CharField(max_length=500)
+    contents = models.TextField()
     email = models.EmailField()
     given_time = models.DateTimeField(auto_now_add=True)
     site = models.ForeignKey(Site, related_name='advices', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return 'Advice at %s' % (self.given_time)
+        return 'Advice at %s' %(self.given_time.strftime('%a, %b %d, %y %H:%M'))
 
     class Meta:
         ordering = ['given_time']

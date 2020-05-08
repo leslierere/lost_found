@@ -14,15 +14,16 @@
 {% endblock %}
 
 {% block org_content %}
-    <h2> Advice List</h2>
+
         <div class="mobile">
             <a href="{% url 'info_advice_create_urlpattern' %}"
             class="button button-primary">
             Create New Advice
             </a>
         </div>
-
-    <ul>
+    {% if perms.info.view_advice %}
+        <h2> Advice List</h2>
+        <ul>
         {% for advice in advice_list %}
             <li>
                 <a href="{{ advice.get_absolute_url }}">{{ advice }}</a>
@@ -31,4 +32,7 @@
             <li><em>There are currently no advices here.</em></li>
         {% endfor %}
     </ul>
+    {% endif %}
+
+
 {% endblock %}

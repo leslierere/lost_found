@@ -15,14 +15,14 @@
 {#            </a>#}
 {#            </li>#}
 {#        {% endif %}#}
-{#        {% if perms.info.delete_site %}#}
+        {% if perms.info.delete_advice %}
             <li>
             <a href="{{ advice.get_delete_url }}"
             class="button">
                 Delete Advice
             </a>
             </li>
-{#        {% endif %}#}
+        {% endif %}
 
     </ul>
     <section>

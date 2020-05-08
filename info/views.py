@@ -213,8 +213,8 @@ class AdviceCreate(CreateView):
     model = Advice
 
 
-class AdviceDelete(DeleteView): # duplicates
+class AdviceDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView): # duplicates
     model = Advice
     success_url = reverse_lazy('info_advice_list_urlpattern')
     # context_object_name = 'item'
-    # permission_required = 'info.delete_founditem'
+    permission_required = 'info.delete_advice'

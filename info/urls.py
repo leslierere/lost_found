@@ -35,12 +35,6 @@ from info.views import (
 
 
 urlpatterns = [
-    # path('item/',
-    #      ItemList.as_view(),
-    #      name = 'info_item_list_urlpattern'),
-    # path('item/found/',
-    #      FoundItems.as_view(),
-    #      name='info_item_found_urlpattern'),
     path('item/lost/',
          LostItemList.as_view(),
          name='info_item_list_lost_urlpattern'),

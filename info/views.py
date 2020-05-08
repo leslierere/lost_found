@@ -72,7 +72,7 @@ class LostItemUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 
 class LostItemDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = LostItem
-    success_url = reverse_lazy('info_item_list_lost_urlpattern')
+    success_url = reverse_lazy('info_myitem_list_urlpattern')
     permission_required = 'info.delete_lostitem'
 
 

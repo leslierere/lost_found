@@ -1,18 +1,12 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from .forms import RegisterForm, EditProfileForm
 
 
 # Create your views here.
 def index(request):
     return render(request, './info/site_list.html')  # diff
-
-
-# def register(request):
-#     form = UserCreationForm
-#     context = {'form': form}
-#     return render(request, 'registration/register.html', context)
 
 
 def register(request):
@@ -35,3 +29,17 @@ def register(request):
 def view_profile(request):
     args = {'user': request.user}
     return render(request, 'registration/profile.html')
+
+
+
+def edit_profile(request):
+    if request.method=='POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('view_profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'registration/edit_profile.html', args)

@@ -1,0 +1,57 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Advice
+{% endblock %}
+
+{% block content %}
+    <h2>{{ advice }}</h2>
+    <ul class="inline">
+{#        {% if perms.info.change_site %}#}
+{#            <li>#}
+{#            <a href="{{ site.get_update_url }}"#}
+{#                class="button">#}
+{#                Edit Site#}
+{#            </a>#}
+{#            </li>#}
+{#        {% endif %}#}
+{#        {% if perms.info.delete_site %}#}
+            <li>
+            <a href="{{ advice.get_delete_url }}"
+            class="button">
+                Delete Advice
+            </a>
+            </li>
+{#        {% endif %}#}
+
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Contents:</th>
+                <td>{{ advice.contents }}</td>
+            </tr>
+            <tr>
+                <th>Site related:</th>
+                <td>{{ advice.site}}</td>
+            </tr>
+{#            <tr>#}
+{#                <th>Contact:</th>#}
+{#                <td>{{ site.contact}} </td>#}
+{#            </tr>#}
+        </table>
+    </section>
+{#    <section>#}
+{#        <h3>Items</h3>#}
+{#        <ul>#}
+{#            {% for item in item_list %}#}
+{#                <li>#}
+{#                    <a href="{{ item.get_absolute_url }}">{{ item }}</a>#}
+{#                </li>#}
+{#            {% empty %}#}
+{#                <li><em>There are currently no found/lost items in {{ site.site_name }}.</em></li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </section>#}
+
+{% endblock %}

@@ -1,6 +1,6 @@
 from django import forms
 
-from info.models import Site, LostItem, FoundItem
+from info.models import Site, LostItem, FoundItem, Advice
 
 
 class SiteForm(forms.ModelForm):
@@ -68,3 +68,12 @@ class FoundItemForm(forms.ModelForm):
 
     def clean_admin(self):
         return self.cleaned_data['admin'].strip()
+
+
+class AdviceForm(forms.ModelForm):
+    class Meta:
+        model = Advice
+        fields = '__all__'
+
+    def clean_contents(self):
+        return self.cleaned_data['contents'].strip()

@@ -1,0 +1,16 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Create Site
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'info_advice_create_urlpattern' %}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Advice</button>
+    </form>
+
+{% endblock %}

@@ -5,12 +5,12 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
-from info.forms import SiteForm, LostItemForm, FoundItemForm
+from info.forms import SiteForm, LostItemForm, FoundItemForm, AdviceForm
 from info.utils import PageLinksMixin
 from .models import (
     LostItem,
     FoundItem,
-    Site)
+    Site, Advice)
 
 
 
@@ -185,3 +185,36 @@ class SiteDelete(LoginRequiredMixin, PermissionRequiredMixin, View):
         site = self.get_object(pk)
         site.delete()
         return redirect('info_site_list_urlpattern')
+
+
+
+class AdviceList(PageLinksMixin, ListView):
+    paginate_by = 15
+    model = Advice
+
+
+
+class AdviceDetail(View):
+
+    def get(self, request, pk):
+        advice = get_object_or_404(
+            Advice,
+            pk=pk
+        )
+        return render(
+            request,
+            'info/advice_detail.html',
+            {'advice': advice}
+        )
+
+
+class AdviceCreate(CreateView):
+    form_class = AdviceForm
+    model = Advice
+
+
+class AdviceDelete(DeleteView): # duplicates
+    model = Advice
+    success_url = reverse_lazy('info_advice_list_urlpattern')
+    # context_object_name = 'item'
+    # permission_required = 'info.delete_founditem'

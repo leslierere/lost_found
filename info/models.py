@@ -115,3 +115,28 @@ class FoundItem(models.Model):
 
 
 
+class Advice(models.Model):
+    advice_id = models.AutoField(primary_key=True)
+    contents = models.CharField(max_length=500)
+    email = models.EmailField()
+    given_time = models.DateTimeField(auto_now_add=True)
+    site = models.ForeignKey(Site, related_name='advices', on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return 'Advice at %s' % (self.given_time)
+
+    class Meta:
+        ordering = ['given_time']
+
+
+    def get_absolute_url(self):
+        return reverse('info_advice_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+    #
+    # def get_update_url(self):
+    #     return reverse('info_item_update_found_urlpattern',
+    #                    kwargs={'pk': self.pk})
+    #
+    def get_delete_url(self):
+        return reverse('info_advice_delete_urlpattern',
+                       kwargs={'pk': self.pk})

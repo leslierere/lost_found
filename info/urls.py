@@ -31,7 +31,11 @@ from info.views import (
     SiteCreate,
     SiteUpdate,
     SiteDelete,
-    MyItems)
+    MyItems,
+    AdviceCreate,
+    AdviceList,
+    AdviceDetail,
+    AdviceDelete)
 
 
 urlpatterns = [
@@ -90,5 +94,19 @@ urlpatterns = [
     path('site/<int:pk>/delete/',
          SiteDelete.as_view(),
          name='info_site_delete_urlpattern'
+         ),
+    path('advice/',
+         AdviceList.as_view(),
+         name = 'info_advice_list_urlpattern'),
+    path('advice/<int:pk>/',
+         AdviceDetail.as_view(),
+         name='info_advice_detail_urlpattern'),
+    path('advice/create/',
+         AdviceCreate.as_view(),
+         name = 'info_advice_create_urlpattern'
+         ),
+    path('advice/<int:pk>/delete/',
+         AdviceDelete.as_view(),
+         name='info_advice_delete_urlpattern'
          ),
 ]

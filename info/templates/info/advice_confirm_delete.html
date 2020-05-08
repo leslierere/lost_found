@@ -1,0 +1,19 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+    Delete Advice
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ advice.get_delete_url }}"
+        method="post">
+    {% csrf_token %}
+    <p>
+        Are you sure that you want to delete
+        the advice?
+    </p>
+    <a href="{{ advice.get_absolute_url }}">Cancel</a>
+    <button type="submit">Delete Advice</button>
+    </form>
+{% endblock %}

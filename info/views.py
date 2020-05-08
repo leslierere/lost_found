@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -34,10 +35,11 @@ class LostItemDetail(View):
         )
 
 
-class LostItemCreate(CreateView):
+class LostItemCreate(LoginRequiredMixin, PermissionRequiredMixin,CreateView):
     form_class = LostItemForm
     # form_class.fields['email'].initial = request.user.email
     model = LostItem
+    permission_required = 'info.add_lostitem'
     # fields = ('item_name', 'place', 'eventDate', 'eventTime', 'description', 'phone', 'email')
 
     def get_initial(self):
@@ -49,16 +51,18 @@ class LostItemCreate(CreateView):
         return super(LostItemCreate, self).form_valid(form)
 
 
-class LostItemUpdate(UpdateView):
+class LostItemUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = LostItemForm
     model = LostItem
     template_name = 'info/item_form_update.html'
+    permission_required = 'info.change_lostitem'
 
 
 
-class LostItemDelete(DeleteView):
+class LostItemDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = LostItem
     success_url = reverse_lazy('info_item_list_lost_urlpattern')
+    permission_required = 'info.delete_lostitem'
 
 
 class FoundItemList(PageLinksMixin, ListView):
@@ -85,22 +89,25 @@ class FoundItemDetail(View):
         )
 
 
-class FoundItemCreate(CreateView):
+class FoundItemCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = FoundItemForm
     model = FoundItem
+    permission_required = 'info.add_founditem'
 
 
-class FoundItemUpdate(UpdateView): # duplicates
+class FoundItemUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView): # duplicates
     form_class = FoundItemForm
     model = FoundItem
     template_name = 'info/item_form_update.html'
+    permission_required = 'info.change_founditem'
 
 
 
-class FoundItemDelete(DeleteView): # duplicates
+class FoundItemDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView): # duplicates
     model = FoundItem
     success_url = reverse_lazy('info_item_list_found_urlpattern')
     # context_object_name = 'item'
+    permission_required = 'info.delete_founditem'
 
 
 
@@ -124,18 +131,21 @@ class SiteDetail(View):
         )
 
 
-class SiteCreate(CreateView):
+class SiteCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = SiteForm
     model = Site
+    permission_required = 'info.add_site'
 
 
-class SiteUpdate(UpdateView):
+class SiteUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = SiteForm
     model = Site
     template_name = 'info/site_form_update.html'
+    permission_required = 'info.change_site'
 
 
-class SiteDelete(View):
+class SiteDelete(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'info.delete_site'
 
     def get(self, request, pk):
         site = self.get_object(pk)

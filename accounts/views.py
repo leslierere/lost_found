@@ -30,3 +30,8 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+def view_profile(request):
+    args = {'user': request.user}
+    return render(request, 'registration/profile.html')

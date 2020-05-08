@@ -30,6 +30,8 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout_urlpattern' %}" class="button">
                         Log Out, {{ user.get_username }}</a></li>
+                    <li><a href="{% url 'view_profile' %}" class="button">
+                        View Profile</a></li>
                 {% else %}
                     <li><a href="{% url 'login_urlpattern' %}" class="button">
                         Log In</a></li>

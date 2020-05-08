@@ -27,15 +27,24 @@ def populate_permissions_lists(apps):
     perm_view_lostitem = permission_class.objects.filter(content_type__app_label='info',
                                                       content_type__model='lostitem',
                                                           codename='view_lostitem')
+    perm_view_advice = permission_class.objects.filter(content_type__app_label='info',
+                                                         content_type__model='advice',
+                                                         codename='view_advice')
+    perm_delete_advice = permission_class.objects.filter(content_type__app_label='info',
+                                                         content_type__model='advice',
+                                                         codename='delete_advice')
 
     admin_permissions = chain(site_permission,
                               founditem_permission,
                               perm_view_user,
-                              perm_view_lostitem)
+                              perm_view_lostitem,
+                              perm_view_advice,
+                              perm_delete_advice)
     worker_permissions = chain(founditem_permission,
                                perm_view_user,
                                perm_view_site,
-                               perm_view_lostitem)
+                               perm_view_lostitem,
+                               perm_view_advice)
     user_permissions = chain(user_permission,
                              lostitem_permission,
                              perm_view_site,

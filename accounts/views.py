@@ -1,10 +1,12 @@
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 
+
 # Create your views here.
 def index(request):
-    return render(request, './info/site_list.html') #diff
+    return render(request, './info/site_list.html')  # diff
 
 
 # def register(request):
@@ -17,7 +19,9 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            group = Group.objects.get(name='user')
+            user.groups.add(group)
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)

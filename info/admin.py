@@ -5,4 +5,3 @@ from .models import LostItem, FoundItem, Site
 admin.site.register(LostItem)
 admin.site.register(FoundItem)
 admin.site.register(Site)
-# admin.site.register(User)

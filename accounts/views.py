@@ -32,9 +32,8 @@ def view_profile(request):
     return render(request, 'registration/profile.html')
 
 
-
 def edit_profile(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
 
         if form.is_valid():
@@ -47,7 +46,7 @@ def edit_profile(request):
 
 
 def change_password(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
 
         if form.is_valid():
@@ -56,7 +55,7 @@ def change_password(request):
             return redirect('view_profile')
         else:
             return redirect('change_password')
-    else: # get request, initialize the form
+    else:  # get request, initialize the form
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
         return render(request, 'registration/change_password.html', args)

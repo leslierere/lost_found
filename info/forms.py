@@ -18,7 +18,7 @@ class SiteForm(forms.ModelForm):
         return self.cleaned_data['contact']
 
 
-class DateInput(forms.DateInput): # for date selection box
+class DateInput(forms.DateInput):  # for date selection box
     input_type = 'date'
 
 
@@ -41,7 +41,6 @@ class LostItemForm(forms.ModelForm):
     def clean_description(self):
         if self.cleaned_data['description']:
             return self.cleaned_data['description'].strip()
-
 
 
 class FoundItemForm(forms.ModelForm):

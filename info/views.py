@@ -13,24 +13,22 @@ from .models import (
     Site, Advice)
 
 
-
 class LostItemList(PageLinksMixin, ListView):
     paginate_by = 10
     model = LostItem
     context_object_name = 'lost_items_list'
 
 
-class MyItems(LoginRequiredMixin, PermissionRequiredMixin,PageLinksMixin, ListView):
+class MyItems(LoginRequiredMixin, PermissionRequiredMixin, PageLinksMixin, ListView):
     paginate_by = 10
     # Specifying model = LostItem is shorthand for saying queryset = LostItem.objects.all()
     # queryset = LostItem.objects.filter(user= request)
     context_object_name = 'my_items'
-    template_name = 'info/myitems_list.html' # why, sometimes this need not be specified
+    template_name = 'info/myitems_list.html'  # why, sometimes this need not be specified
     permission_required = 'info.add_lostitem'
 
     def get_queryset(self):
         return LostItem.objects.filter(user=self.request.user)
-
 
 
 class LostItemDetail(View):
@@ -46,16 +44,17 @@ class LostItemDetail(View):
         )
 
 
-class LostItemCreate(LoginRequiredMixin, PermissionRequiredMixin,CreateView):
+class LostItemCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = LostItemForm
     # form_class.fields['email'].initial = request.user.email
     model = LostItem
     permission_required = 'info.add_lostitem'
+
     # fields = ('item_name', 'place', 'eventDate', 'eventTime', 'description', 'phone', 'email')
 
     def get_initial(self):
         email = self.request.user.email
-        return {'email':email}
+        return {'email': email}
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -69,7 +68,6 @@ class LostItemUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = 'info.change_lostitem'
 
 
-
 class LostItemDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = LostItem
     success_url = reverse_lazy('info_myitem_list_urlpattern')
@@ -80,6 +78,7 @@ class FoundItemList(PageLinksMixin, ListView):
     paginate_by = 10
     model = FoundItem
     context_object_name = 'found_items_list'
+
 
 # class FoundItems(PageLinksMixin, ListView):
 #     paginate_by = 10
@@ -106,20 +105,18 @@ class FoundItemCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = 'info.add_founditem'
 
 
-class FoundItemUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView): # duplicates
+class FoundItemUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):  # duplicates
     form_class = FoundItemForm
     model = FoundItem
     template_name = 'info/item_form_update.html'
     permission_required = 'info.change_founditem'
 
 
-
-class FoundItemDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView): # duplicates
+class FoundItemDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):  # duplicates
     model = FoundItem
     success_url = reverse_lazy('info_item_list_found_urlpattern')
     # context_object_name = 'item'
     permission_required = 'info.delete_founditem'
-
 
 
 class SiteList(PageLinksMixin, ListView):
@@ -138,7 +135,7 @@ class SiteDetail(View):
         return render(
             request,
             'info/site_detail.html',
-            {'site': site, 'item_list':item_list}
+            {'site': site, 'item_list': item_list}
         )
 
 
@@ -187,11 +184,9 @@ class SiteDelete(LoginRequiredMixin, PermissionRequiredMixin, View):
         return redirect('info_site_list_urlpattern')
 
 
-
 class AdviceList(PageLinksMixin, ListView):
     paginate_by = 15
     model = Advice
-
 
 
 class AdviceDetail(View):
@@ -213,7 +208,7 @@ class AdviceCreate(CreateView):
     model = Advice
 
 
-class AdviceDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView): # duplicates
+class AdviceDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):  # duplicates
     model = Advice
     success_url = reverse_lazy('info_advice_list_urlpattern')
     # context_object_name = 'item'

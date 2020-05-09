@@ -13,7 +13,6 @@ class RegisterForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 
-
 class EditProfileForm(UserChangeForm):
     password = None
 
@@ -22,6 +21,5 @@ class EditProfileForm(UserChangeForm):
         fields = (
             'email',
             'first_name',
-            'last_name',
-        )
-        # exclude = ()
+            'last_name'
+        ) # exclude = ()

@@ -66,6 +66,7 @@ def populate_permissions_lists(apps):
     ]
     return my_groups_initialization_list
 
+
 def add_group_permissions_data(apps, schema_editor):
     groups_initialization_list = populate_permissions_lists(apps)
 

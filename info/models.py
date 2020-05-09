@@ -1,14 +1,12 @@
 from django.db import models
-# from django.db.models import EmailField
 from django.urls import reverse
-from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
 
 
 # Create your models here.
 class Site(models.Model):
-    site_id = models.AutoField(primary_key = True)
+    site_id = models.AutoField(primary_key=True)
     site_name = models.CharField(max_length=45, unique=True)
     location = models.CharField(max_length=80, unique=True)
     contact = models.IntegerField()
@@ -49,10 +47,9 @@ class LostItem(models.Model):
     registeredTime = models.DateTimeField(auto_now_add=True)
     # quantity = models.IntegerField()
     description = models.CharField(max_length=80, null=True, blank=True)
-    phone = PhoneNumberField(null=True, blank=True) # may changed to be autofilled later
+    phone = PhoneNumberField(null=True, blank=True)  # may changed to be autofilled later
     email = models.EmailField()
     found = models.BooleanField(default=False)
-    # user = models.ForeignKey(User, related_name='items', on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -91,7 +88,7 @@ class FoundItem(models.Model):
     email = models.EmailField(blank=True)
     pickedTime = models.DateTimeField(blank=True, null=True)
     pickedInfo = models.CharField(max_length=80, blank=True, default='')
-    admin = models.CharField(max_length=30, blank=True, default='') # the administrator who process the pickedUp
+    admin = models.CharField(max_length=30, blank=True, default='')  # the administrator who process the pickedUp
 
     site = models.ForeignKey(Site, related_name='items', on_delete=models.PROTECT)
 
@@ -122,15 +119,15 @@ class Advice(models.Model):
     site = models.ForeignKey(Site, related_name='advices', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return 'Advice at %s' %(self.given_time.strftime('%a, %b %d, %y %H:%M'))
+        return 'Advice at %s' % (self.given_time.strftime('%a, %b %d, %y %H:%M'))
 
     class Meta:
         ordering = ['given_time']
 
-
     def get_absolute_url(self):
         return reverse('info_advice_detail_urlpattern',
                        kwargs={'pk': self.pk})
+
     #
     # def get_update_url(self):
     #     return reverse('info_item_update_found_urlpattern',

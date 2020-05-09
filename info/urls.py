@@ -37,7 +37,6 @@ from info.views import (
     AdviceDetail,
     AdviceDelete)
 
-
 urlpatterns = [
     path('item/lost/',
          LostItemList.as_view(),
@@ -47,7 +46,7 @@ urlpatterns = [
          name='info_myitem_list_urlpattern'),
     path('item/lost/<int:pk>/',
          LostItemDetail.as_view(),
-         name = 'info_lostitem_detail_urlpattern'),
+         name='info_lostitem_detail_urlpattern'),
     path('item/lost/create/',
          LostItemCreate.as_view(),
          name='info_item_create_lost_urlpattern'
@@ -80,13 +79,13 @@ urlpatterns = [
          ),
     path('site/',
          SiteList.as_view(),
-         name = 'info_site_list_urlpattern'),
+         name='info_site_list_urlpattern'),
     path('site/<int:pk>/',
          SiteDetail.as_view(),
-         name = 'info_site_detail_urlpattern'),
+         name='info_site_detail_urlpattern'),
     path('site/create/',
          SiteCreate.as_view(),
-         name = 'info_site_create_urlpattern'
+         name='info_site_create_urlpattern'
          ),
     path('site/<int:pk>/update/',
          SiteUpdate.as_view(),
@@ -97,13 +96,13 @@ urlpatterns = [
          ),
     path('advice/',
          AdviceList.as_view(),
-         name = 'info_advice_list_urlpattern'),
+         name='info_advice_list_urlpattern'),
     path('advice/<int:pk>/',
          AdviceDetail.as_view(),
          name='info_advice_detail_urlpattern'),
     path('advice/create/',
          AdviceCreate.as_view(),
-         name = 'info_advice_create_urlpattern'
+         name='info_advice_create_urlpattern'
          ),
     path('advice/<int:pk>/delete/',
          AdviceDelete.as_view(),

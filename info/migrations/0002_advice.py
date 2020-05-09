@@ -18,7 +18,8 @@ class Migration(migrations.Migration):
                 ('contents', models.TextField()),
                 ('email', models.EmailField(max_length=254)),
                 ('given_time', models.DateTimeField(auto_now_add=True)),
-                ('site', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='advices', to='info.Site')),
+                ('site', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                           related_name='advices', to='info.Site')),
             ],
             options={
                 'ordering': ['given_time'],

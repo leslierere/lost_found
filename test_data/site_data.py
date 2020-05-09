@@ -5,20 +5,20 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import migrations
 
-
 SITES = []
+
 
 def add_data(target):
     for i in range(30):
         target.append({
             'site_name': "Test" + str(i) + " Library",
             'location': "Test" + str(i) + " St",
-            'contact': 1000000+i
+            'contact': 1000000 + i
         })
+
 
 add_data(SITES)
 print('[')
 for site in SITES:
     print(site, ",")
 print(']')
-

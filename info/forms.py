@@ -57,6 +57,12 @@ class FoundItemForm(forms.ModelForm):
         widgets = {'eventDate': DateInput(), 'pickedTime': DateInput()}
         fields = '__all__'
 
+    def clean_eventDate(self):
+        date = self.cleaned_data['eventDate']
+        if date > datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the future")
+        return date
+
     def clean_item_name(self):
         return self.cleaned_data['item_name'].strip()
 

@@ -4,6 +4,7 @@ from django.db import models
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 # Create your models here.
@@ -44,7 +45,7 @@ class LostItem(models.Model):
     item_id = models.AutoField(primary_key=True)
     item_name = models.CharField(max_length=30)
     place = models.CharField(max_length=80)  # where the item is lost
-    eventDate = models.DateField(default=datetime.date.today())
+    eventDate = models.DateField(default=timezone.now)
     eventTime = models.CharField(max_length=20)  # like 'around 2pm'
     registeredTime = models.DateTimeField(auto_now_add=True)
     # quantity = models.IntegerField()
@@ -77,7 +78,7 @@ class FoundItem(models.Model):
     item_id = models.AutoField(primary_key=True)
     item_name = models.CharField(max_length=30)
     place = models.CharField(max_length=80)  # where the item is found or lost
-    eventDate = models.DateField()
+    eventDate = models.DateField(default=timezone.now)
     eventTime = models.CharField(max_length=20)  # like 'around 2pm'
     registeredTime = models.DateTimeField(auto_now_add=True)
     # quantity = models.IntegerField()

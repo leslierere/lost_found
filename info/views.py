@@ -16,6 +16,7 @@ from .models import (
 class LostItemList(PageLinksMixin, ListView):
     paginate_by = 10
     model = LostItem
+    queryset = LostItem.objects.filter(found=False)
     context_object_name = 'lost_items_list'
 
 

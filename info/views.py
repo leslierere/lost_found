@@ -62,6 +62,15 @@ class LostItemCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return super(LostItemCreate, self).form_valid(form)
 
 
+def get_found(request, pk):
+    item = LostItem.objects.get(pk=pk)
+    item.found = True
+    item.save()
+    return render(request,
+                  'info/lostitem_detail.html',
+                  {'item': item})
+
+
 class LostItemUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = LostItemForm
     model = LostItem

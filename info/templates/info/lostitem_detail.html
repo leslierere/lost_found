@@ -22,6 +22,15 @@
                     Delete Item
                 </a>
             </li>
+            {% if not item.found %}
+                <li>
+                    <form action="{% url 'info_item_get_found_urlpattern' pk=item.pk %}" method=POST>
+                        {% csrf_token %}
+                    <button id="approve-btn" type="submit">Found</button>
+
+                    </form>
+                </li>
+            {% endif %}
         {% endif %}
 
 

@@ -22,6 +22,7 @@ from info.views import (
     LostItemCreate,
     LostItemUpdate,
     LostItemDelete,
+    get_found,
     FoundItemList,
     FoundItemDetail,
     FoundItemCreate,
@@ -54,6 +55,10 @@ urlpatterns = [
     path('item/lost/<int:pk>/update/',
          LostItemUpdate.as_view(),
          name='info_item_update_lost_urlpattern'
+         ),
+    path('item/lost/<int:pk>/get_found/',
+         get_found,
+         name='info_item_get_found_urlpattern'
          ),
     path('item/lost/<int:pk>/delete/',
          LostItemDelete.as_view(),

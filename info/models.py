@@ -12,7 +12,7 @@ class Site(models.Model):
     site_id = models.AutoField(primary_key=True)
     site_name = models.CharField(max_length=45, unique=True)
     location = models.CharField(max_length=80, unique=True)
-    contact = models.IntegerField()
+    contact = PhoneNumberField()
 
     def __str__(self):
         return '%s' % self.site_name

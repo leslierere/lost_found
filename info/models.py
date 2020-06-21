@@ -54,6 +54,7 @@ class LostItem(models.Model):
     email = models.EmailField()
     found = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='lost_item_img', blank=True)
 
     def __str__(self):
         return '%s lost at %s' % (self.item_name, self.place)
@@ -92,6 +93,7 @@ class FoundItem(models.Model):
     pickedTime = models.DateTimeField(blank=True, null=True)
     pickedInfo = models.CharField(max_length=80, blank=True, default='')
     admin = models.CharField(max_length=30, blank=True, default='')  # the administrator who process the pickedUp
+    image = models.ImageField(upload_to='found_item_img', blank=True)
 
     site = models.ForeignKey(Site, related_name='items', on_delete=models.PROTECT)
 

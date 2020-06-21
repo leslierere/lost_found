@@ -46,6 +46,16 @@
                 <th>Site located:</th>
                 <td><a href="{{ item.site.get_absolute_url }}">{{ item.site}}</a> </td>
             </tr>
+            {% if item.image %}
+                <tr>
+                    <img src="{{ item.image.url }}" width="200">
+                </tr>
+            {% else %}
+                <tr>
+                    <br>No image uploaded for this item.<br>
+                </tr>
+            {% endif %}
+
         </table>
     </section>
 

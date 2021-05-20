@@ -6,6 +6,16 @@
 
 {% block content %}
     <h2>{{ site }}</h2>
+    <div id="home-tiles" class="row">
+      <div class="col-md-4 col-sm-12 col-xs-12">
+        <a href="{{ site.get_map_url }}" target="_blank">
+          <div id="map-tile">
+              <iframe src="{{ site.get_real_map_url }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+
+        </a>
+      </div>
+    </div>
     <ul class="inline">
         {% if perms.info.change_site %}
             <li>

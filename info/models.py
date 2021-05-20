@@ -22,6 +22,26 @@ class Site(models.Model):
         return reverse('info_site_update_urlpattern',
                        kwargs={'pk': self.pk})
 
+    def get_map_url(self):
+        if self.site_name=="Main library":
+            return "https://goo.gl/maps/nBsAbiuw7Yf4bcoi9"
+        elif self.site_name=="Grainger":
+            return "https://goo.gl/maps/4r5uQGRwXP7sXdicA"
+        elif self.site_name=="Undergrad Library":
+            return "https://goo.gl/maps/uvpx6GuJmeZ34173A"
+        elif self.site_name=="FUNK":
+            return "https://goo.gl/maps/yEj7qVGoczt9S4xt7"
+
+    def get_real_map_url(self):
+        if self.site_name=="Main library":
+            return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3051.686215138374!2d-88.23119908522251!3d40.104708482481705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880cd73db42cf56b%3A0xea81d21581484965!2sMain%20Library!5e0!3m2!1sen!2sus!4v1621482153908!5m2!1sen!2sus"
+        elif self.site_name=="Grainger":
+            return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3051.33650358391!2d-88.22910588522228!3d40.11250378201058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880cd76a968358b5%3A0xae7c7d5e32439ec2!2sGrainger%20Engineering%20Library!5e0!3m2!1sen!2sus!4v1621482123561!5m2!1sen!2sus"
+        elif self.site_name=="Undergrad Library":
+            return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3051.686071592053!2d-88.22909918522257!3d40.104711682481515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880cd73d8d6ccc6d%3A0x8660329536de34ae!2sUndergraduate%20Library!5e0!3m2!1sen!2sus!4v1621482096544!5m2!1sen!2sus"
+        elif self.site_name=="FUNK":
+            return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3051.7707577815722!2d-88.22729948522262!3d40.1028237825957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880cd717b0f51ec1%3A0x5ec7f43f8cadd9bf!2sFunk%20Agricultural%2C%20Consumer%2C%20and%20Environmental%20Sciences%20Library%20(Funk%20ACES)!5e0!3m2!1sen!2sus!4v1621481901850!5m2!1sen!2sus"
+
     def get_delete_url(self):
         return reverse('info_site_delete_urlpattern',
                        kwargs={'pk': self.pk})

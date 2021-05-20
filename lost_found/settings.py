@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -75,23 +76,24 @@ WSGI_APPLICATION = 'lost_found.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 # for deployement later
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'lostfound',
-#         'USER': 'root',
-#         'PASSWORD':'itwillwork',
-#         'HOST': '127.0.0.1',
-#         'PORT':'3306',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lostfound',
+        'USER': 'root',
+        'PASSWORD':'itwillwork',
+        # 'HOST': '127.0.0.1',
+        # 'PORT':'3306',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -129,6 +131,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/' # the path in url
+MEDIA_ROOT = os.path.join(BASE_DIR, 'info/media/') #the actual folder place
 
 LOGIN_REDIRECT_URL = '/'
 

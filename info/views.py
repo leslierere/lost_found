@@ -16,6 +16,7 @@ from .models import (
 class LostItemList(PageLinksMixin, ListView):
     paginate_by = 10
     model = LostItem
+    queryset = LostItem.objects.filter(found=False)
     context_object_name = 'lost_items_list'
 
 
@@ -59,6 +60,15 @@ class LostItemCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(LostItemCreate, self).form_valid(form)
+
+
+def get_found(request, pk):
+    item = LostItem.objects.get(pk=pk)
+    item.found = True
+    item.save()
+    return render(request,
+                  'info/lostitem_detail.html',
+                  {'item': item})
 
 
 class LostItemUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):

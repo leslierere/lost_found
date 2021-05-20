@@ -1,7 +1,10 @@
+import datetime
+
 from django.db import models
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 # Create your models here.
@@ -9,7 +12,7 @@ class Site(models.Model):
     site_id = models.AutoField(primary_key=True)
     site_name = models.CharField(max_length=45, unique=True)
     location = models.CharField(max_length=80, unique=True)
-    contact = models.IntegerField()
+    contact = PhoneNumberField()
 
     def __str__(self):
         return '%s' % self.site_name
@@ -62,7 +65,7 @@ class LostItem(models.Model):
     item_id = models.AutoField(primary_key=True)
     item_name = models.CharField(max_length=30)
     place = models.CharField(max_length=80)  # where the item is lost
-    eventDate = models.DateField()
+    eventDate = models.DateField(default=datetime.date.today)
     eventTime = models.CharField(max_length=20)  # like 'around 2pm'
     registeredTime = models.DateTimeField(auto_now_add=True)
     # quantity = models.IntegerField()
@@ -71,6 +74,7 @@ class LostItem(models.Model):
     email = models.EmailField()
     found = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='lost_item_img', blank=True)
 
     def __str__(self):
         return '%s lost at %s' % (self.item_name, self.place)
@@ -95,7 +99,7 @@ class FoundItem(models.Model):
     item_id = models.AutoField(primary_key=True)
     item_name = models.CharField(max_length=30)
     place = models.CharField(max_length=80)  # where the item is found or lost
-    eventDate = models.DateField()
+    eventDate = models.DateField(default=datetime.date.today)
     eventTime = models.CharField(max_length=20)  # like 'around 2pm'
     registeredTime = models.DateTimeField(auto_now_add=True)
     # quantity = models.IntegerField()
@@ -109,6 +113,7 @@ class FoundItem(models.Model):
     pickedTime = models.DateTimeField(blank=True, null=True)
     pickedInfo = models.CharField(max_length=80, blank=True, default='')
     admin = models.CharField(max_length=30, blank=True, default='')  # the administrator who process the pickedUp
+    image = models.ImageField(upload_to='found_item_img', blank=True)
 
     site = models.ForeignKey(Site, related_name='items', on_delete=models.PROTECT)
 

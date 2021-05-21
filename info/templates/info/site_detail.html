@@ -17,6 +17,15 @@
       </div>
     </div>
     <ul class="inline">
+            <li>
+{#                <a href=""#}
+{#                    class="button">#}
+{#                    Show Map#}
+{#                </a>#}
+                <button id="map_button">
+                    Show Map
+                </button>
+            </li>
         {% if perms.info.change_site %}
             <li>
             <a href="{{ site.get_update_url }}"

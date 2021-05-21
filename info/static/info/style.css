@@ -234,6 +234,10 @@ body>footer li{
 	margin: 0 1em;
 }
 
+#map-tile {
+display: none;
+}
+
 /*.feed {*/
   /*margin-left: 3px;*/
   /*padding: 0 0 0 19px;*/
